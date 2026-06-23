@@ -1,10 +1,8 @@
 import mongoose from 'mongoose'
-
 // define the type of mongoose variable inside the global object
 declare global {
   var mongoose: any
 }
-
 let cached = global.mongoose
 
 if (!cached) {
