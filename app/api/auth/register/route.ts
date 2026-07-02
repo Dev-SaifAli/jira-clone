@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { ZodError } from 'zod/v3'
+import { ZodError } from 'zod'
 import { User } from '@/models/User'
 import dbConnect from '@/lib/db'
 import bcrypt from 'bcrypt'
@@ -73,5 +73,10 @@ export async function POST (req: NextRequest) {
         { status: 409 }
       )
     }
+    console.error('Registration error: ', error)
+    return NextResponse.json(
+      { error: 'Internal server error' },
+      { status: 500 }
+    )
   }
 }

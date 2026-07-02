@@ -1,4 +1,4 @@
-import { z } from 'zod'
+import { email, z } from 'zod'
 
 // Run-time validation schema
 
@@ -24,4 +24,16 @@ export const registerSchema = z.object({
     )
 })
 
+export const loginSchema = z.object({
+  email: z
+    .string()
+    .toLowerCase()
+    .trim()
+    .min(1, 'Email is required')
+    .email('Invalid email format'),
+
+  password: z.string().min(1, 'Password is required')
+})
+
 export type registerInput = z.infer<typeof registerSchema>
+export type loginInput = z.infer<typeof loginSchema>
